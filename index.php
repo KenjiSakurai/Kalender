@@ -78,14 +78,19 @@
                     $namn = implode(" ", $namnsdagar["$dateofyear"]);
 
 
-
+                    if($i <10){
+                        $dagPlusNoll = "0$i";
+                    }
+                    else if($i >=10){
+                        $dagPlusNoll= $i;
+                    }
 
                     if($bdayArr = fgets($file))
                     {
                     $temp = explode(",", $bdayArr);
                     for($x = 0; $x < count($temp); $x++)
                     {
-                        $t = "$month2-$i";
+                        $t = "$month2-$dagPlusNoll";
                         $temp2 = explode(".", $temp[$x]);
                         $temp3 = substr($temp2[0], 5);
                         $bDate = $temp3;
@@ -157,13 +162,6 @@
             <input name="save" type="submit">
         </form>
     <?
-        // Checks for a post submit and converts the data into a .txt file.
-        // if(isset($_POST["save"])){
-        //     $file = fopen("birthday.txt", "a+");
-        //     $writeB = $_POST["bday"] . "\n" . $_POST["name"] . "\n";
-        //     fwrite($file, $writeB);
-        //     fclose($file); 
-        // }
 
         if(isset($_POST["save"])){
             $file=fopen("birthday.txt", "a+");
